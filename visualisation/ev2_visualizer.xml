@@ -1,0 +1,75 @@
+<application>
+<name>vBallDemo</name>
+
+<dependencies>
+</dependencies>
+
+<module>
+    <name> zynqGrabber </name>
+    <parameters> </parameters>
+    <node> icub-zynq </node>
+</module>
+
+<module>
+    <name> vPreProcess </name>
+    <parameters>--vision --flipx --flipy</parameters>
+    <node> localhost </node>
+</module>
+
+<module>
+    <name> vFramer</name>
+    <parameters> --name /vFramer/right --width 304 --height 240 --iso --grey --eros </parameters>
+    <node> localhost </node>
+</module>
+
+<module>
+    <name> vFramer</name>
+    <parameters> --name /vFramer/left --width 304 --height 240 --iso --grey --eros </parameters>
+    <node> localhost </node>
+</module>
+
+<connection>
+  <from>/zynqGrabber/AE:o</from>
+  <to>/vPreProcess/AE:i</to>
+  <protocol>fast_tcp</protocol>
+</connection>
+
+<connection>
+  <from>/vPreProcess/right/AE:o</from>
+  <to>/vFramer/right/iso/AE:i</to>
+  <protocol>fast_tcp</protocol>
+</connection>
+
+<connection>
+  <from>/vPreProcess/left/AE:o</from>
+  <to>/vFramer/left/iso/AE:i</to>
+  <protocol>fast_tcp</protocol>
+</connection>
+
+<connection>
+  <from>/vPreProcess/right/AE:o</from>
+  <to>/vFramer/right/grey/AE:i</to>
+  <protocol>fast_tcp</protocol>
+</connection>
+
+<connection>
+  <from>/vPreProcess/left/AE:o</from>
+  <to>/vFramer/left/grey/AE:i</to>
+  <protocol>fast_tcp</protocol>
+</connection>
+
+<connection>
+  <from>/vPreProcess/right/AE:o</from>
+  <to>/vFramer/right/eros/AE:i</to>
+  <protocol>fast_tcp</protocol>
+</connection>
+
+<connection>
+  <from>/vPreProcess/AE/left:o</from>
+  <to>/vFramer/left/eros/AE:i</to>
+  <protocol>fast_tcp</protocol>
+</connection>
+
+
+
+</application>
