@@ -22,7 +22,7 @@
 ### power supply (under the desk)
   - should be plugged in to desk power outlets.
   - turn on with button
-  - 40 V
+  - 40 V / 12A
 
 ### icub-robot
   - the buttons on the backpack should light-up red.
