@@ -2,6 +2,7 @@
 
 Here is a list of things to check each MED day
 
+- [check hardware](hardware_check.md)
 - Update Firmware and Software following the guide [here](https://github.com/event-driven-robotics/event-driven-robotics.github.io/blob/master/resources/firmwareUpdateREADME.md)
 - Check the open [issues](https://github.com/robotology/icub-tech-support/issues?q=is%3Aissue+is%3Aopen+label%3AiCubGenova02+) and ask for status update from icub-tech.
 - Work on any event-driven maintenance issues (e.g. zynqGrabber)
