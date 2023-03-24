@@ -3,7 +3,7 @@
 Here is a list of things to check each MED day
 
 - It could be possible the hardware/network isn't connected correctly. [Check hardware](hardware_check.md) if needed.
-- Update Firmware and Software following the guide [here](https://github.com/event-driven-robotics/event-driven-robotics.github.io/blob/master/resources/firmwareUpdateREADME.md)
+- Update Firmware and Software following the guide [here](software_update.md)
 - Check the open [issues](https://github.com/robotology/icub-tech-support/issues?q=is%3Aissue+is%3Aopen+label%3AiCubGenova02+) and ask for status update from icub-tech.
 - Check last-weeks [maintenance](https://github.com/event-driven-robotics/event-driven-demos/issues) issues to see issues that should be carried over to this week
 - Make a new issues to record what was done for this weeks MED!
