@@ -1,13 +1,13 @@
 ### Insert Debug Modules
 The following modules are required to perform some of the debug operation described here:
 
-`sudo insmod iit_ccam3_gen3.ko`
+`sudo insmod iit-ccam3-gen3.ko`
 
-`sudo insmod iit_vsctrl.ko`
+`sudo insmod iit-vsctrl.ko`
 
 you can check they are already inserted with:
 
-`sudo lsmod`
+`lsmod`
 
 ### Read HPU Registers
 To read register values of the HPU core use: 
