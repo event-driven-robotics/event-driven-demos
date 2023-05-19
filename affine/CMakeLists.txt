@@ -18,14 +18,6 @@ find_package(event-driven REQUIRED)
 
 add_executable(${PROJECT_NAME} main.cpp eros.h affine.h)
 
-target_link_libraries(stimulus PRIVATE YARP::YARP_OS
-        YARP::YARP_init
-        YARP::YARP_sig
-        YARP::YARP_dev
-        YARP::YARP_math
-        ev::event-driven
-        ${OpenCV_LIBRARIES})
-
 target_link_libraries(${PROJECT_NAME} PRIVATE YARP::YARP_OS
         YARP::YARP_init
         YARP::YARP_sig

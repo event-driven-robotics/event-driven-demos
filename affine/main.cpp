@@ -3,7 +3,6 @@ using namespace yarp::os;
 
 #include "eros.h"
 #include "affine.h"
-#include "ROScommunication.h"
 
 class affineTracking: public yarp::os::RFModule
 {
@@ -30,7 +29,6 @@ private:
 
     EROSfromYARP eros_handler;
     affineTransforms affine_handler;
-    YarpToRos ros_publish;
     std::thread computation_thread;
 
 public:
@@ -96,7 +94,6 @@ public:
         affine_handler.create_maps(); 
 
         // yInfo()<<"maps created";
-        ros_publish.initPublisher(); 
 
         computation_thread = std::thread([this]{tracking_loop();});
 
@@ -200,27 +197,6 @@ public:
                 eros_handler.setEROSupdateROI(affine_handler.roi_around_shape);
                 double eros_time_after = eros_handler.tic;
                 double eros_diff_time = eros_time_after-eros_time_before;
-
-                if(tau_latency>0){
-                    fakeLat_queue.push_back({double(affine_handler.new_position.x), double(affine_handler.new_position.y), affine_handler.state[2], affine_handler.state[3], yarp::os::Time::now()});
-                    std::array<double, 4> current_state;
-                    bool found_pos_sent=false;
-                    while(fakeLat_queue.size()>0 && (yarp::os::Time::now()-fakeLat_queue.front().tstamp)>tau_latency){
-                        current_state = fakeLat_queue.front().state;
-                        found_pos_sent = true;
-                        fakeLat_queue.pop_front();
-                    }
-                    if (found_pos_sent){
-                        ros_publish.publishTargetPos(img_size, current_state[0], current_state[1], current_state[2], current_state[3]);
-                        data_to_save.push_back({elapsed_time, eros_handler.dur, double(eros_handler.packet_events), current_state[0], current_state[1], current_state[2], current_state[3], double(eros_handler.dt_not_read_events), eros_diff_time, dT, affine_handler.roi_around_shape.x, affine_handler.roi_around_shape.y, affine_handler.roi_around_shape.width, affine_handler.roi_around_shape.height});
-                    }
-
-                }else{
-                    ros_publish.publishTargetPos(img_size, affine_handler.new_position.x, affine_handler.new_position.y, affine_handler.state[2], affine_handler.state[3]); 
-                    if (fs.is_open() && eros_handler.tic > 0) {
-                        data_to_save.push_back({elapsed_time, eros_handler.dur, double(eros_handler.packet_events), double(affine_handler.new_position.x), double(affine_handler.new_position.y), affine_handler.state[2], affine_handler.state[3], double(eros_handler.dt_not_read_events), eros_diff_time, dT, affine_handler.roi_around_shape.x, affine_handler.roi_around_shape.y, affine_handler.roi_around_shape.width, affine_handler.roi_around_shape.height});
-                    }
-                }
                 
                 // this->dt_warpings = toc_warpings - tic_warpings;
                 // this->dt_comparison = toc_comparison - tic_comparison;
