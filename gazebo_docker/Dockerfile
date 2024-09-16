@@ -55,14 +55,14 @@ RUN cd $SOURCE_FOLDER && \
 
 RUN cd $SOURCE_FOLDER && \
      git clone https://github.com/event-driven-robotics/event-driven-demos.git && \
-     cd tutorial_cartesian-interface && \
+     cd tutorial_cartesian && \
      mkdir build && \
      cd build/ && \
      cmake .. \
      make -j `nproc` install
      
 RUN cd $SOURCE_FOLDER && \
-     cd tutorial_joint-interface && \
+     cd tutorial_joint && \
      mkdir build && \
      cd build/ && \
      cmake .. \
