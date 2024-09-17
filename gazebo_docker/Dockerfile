@@ -55,17 +55,21 @@ RUN cd $SOURCE_FOLDER && \
 
 RUN cd $SOURCE_FOLDER && \
      git clone https://github.com/event-driven-robotics/event-driven-demos.git && \
-     cd tutorial_cartesian && \
+     cd event-driven-demos/ && \
+     git checkout tutorials && \
+     cd tutorial_cartesian/ && \
      mkdir build && \
      cd build/ && \
-     cmake .. \
+     cmake .. && \
      make -j `nproc` install
      
 RUN cd $SOURCE_FOLDER && \
+     cd event-driven-demos/ && \
+     git checkout tutorials && \
      cd tutorial_joint && \
      mkdir build && \
      cd build/ && \
-     cmake .. \
+     cmake .. &&\
      make -j `nproc` install
 
 COPY models /usr/local/share/models
